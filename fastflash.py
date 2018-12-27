@@ -18,6 +18,7 @@
 
 # Builtin libraries
 import re
+import sys
 import time
 import platform
 import commands
@@ -75,16 +76,13 @@ def reboot_by_uart(port, baudrate):
 
 
 if __name__ == '__main__':
-    #if is_windows_os():
-    #    reboot_by_uart(SERIAL_PORT_WINDOWS, SERIAL_BAUDRATE)
-    #else:
-    #    reboot_by_uart(SERIAL_PORT_UNIX, SERIAL_BAUDRATE)
-    SERIAL_PORT = sys.argv[1]
-    if SERIAL_PORT == '':
+    if len(sys.argv) == 1:
         if is_windows_os():
             SERIAL_PORT = SERIAL_PORT_WINDOWNS
         else:
             SERIAL_PORT = SERIAL_PORT_UNIX
+    else:
+        SERIAL_PORT = sys.argv[1]
 
     reboot_by_uart(SERIAL_PORT, SERIAL_BAUDRATE)
 
