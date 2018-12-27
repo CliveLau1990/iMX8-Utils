@@ -75,10 +75,18 @@ def reboot_by_uart(port, baudrate):
 
 
 if __name__ == '__main__':
-    if is_windows_os():
-        reboot_by_uart(SERIAL_PORT_WINDOWS, SERIAL_BAUDRATE)
-    else:
-        reboot_by_uart(SERIAL_PORT_UNIX, SERIAL_BAUDRATE)
+    #if is_windows_os():
+    #    reboot_by_uart(SERIAL_PORT_WINDOWS, SERIAL_BAUDRATE)
+    #else:
+    #    reboot_by_uart(SERIAL_PORT_UNIX, SERIAL_BAUDRATE)
+    SERIAL_PORT = sys.argv[1]
+    if SERIAL_PORT == '':
+        if is_windows_os():
+            SERIAL_PORT = SERIAL_PORT_WINDOWNS
+        else:
+            SERIAL_PORT = SERIAL_PORT_UNIX
+
+    reboot_by_uart(SERIAL_PORT, SERIAL_BAUDRATE)
 
     status, output = get_status_output('fastboot flash bootloader0 flash.bin')
     print(output)
