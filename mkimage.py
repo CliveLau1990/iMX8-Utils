@@ -86,7 +86,7 @@ class TinySsh(object):
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        usage
+        usage(sys.argv[0])
         exit(255)
 
     PUT_SRC_FILE = os.path.abspath(sys.argv[1])
