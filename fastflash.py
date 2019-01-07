@@ -65,12 +65,12 @@ def reboot_by_uart(port, baudrate):
         line = ser.readline()
         print(line)
         if re.search(b'=>', line):
-            ser.write('fastboot 0\n')
+            ser.write('\nfastboot 0\n')
             break
         elif re.search(b'console:/', line):
-            ser.write('reboot bootloader\n')
+            ser.write('\nreboot bootloader\n')
             break
-        time.sleep(1)
+        time.sleep(0.3)
         ser.flush()
     ser.close()
 
